@@ -17,7 +17,7 @@
 #     def wash(self, thing):
 #         print(f"Vacuum cleaner whased at {self.location}")
 
-from VacuumEnvironment import *
+from VacuumEnvironment4Path import *
 from aima_python.agents import *
 
 
@@ -30,14 +30,9 @@ from aima_python.agents import *
 #         return
 
 
-def VacuumCleaner():
-    """An agent that keeps track of what locations are clean or dirty.
-    >>> agent = ModelBasedVacuumAgent()
-    >>> environment = TrivialVacuumEnvironment()
-    >>> environment.add_thing(agent)
-    >>> environment.run()
-    >>> environment.status == {(1,0):'Clean' , (0,0) : 'Clean'}
-    True
+def ModelVacuumCleaner():
+    """An model based vacuum cleaner agent that keeps track of what locations are 
+    clean, dirty or really dirty.
     """
     loc_A = VacuumEnvironment4Path.loc_A
     loc_B = VacuumEnvironment4Path.loc_B
@@ -47,9 +42,9 @@ def VacuumCleaner():
     model = {loc_A: None, loc_B: None, loc_C: None, loc_D: None}
 
     def program(percept):
-        """Same as ReflexVacuumAgent, except if everything is clean, do NoOp."""
+        """Module responsible for taking a percept as input and return a defined action."""
         location, status = percept
-        print(f"Vaccum cleaner at location {location}, with status {status}")
+        print(f"Vaccum cleaner at location {location}, it percepts status {status}")
         model[location] = status  # Update the model here
         if model[loc_A] == model[loc_B] == model[loc_C] == model[loc_D] == 'Clean':
             return 'NoOp'
